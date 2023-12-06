@@ -1,38 +1,20 @@
+clc
 clear
-global x u gamma
-x(1)=input("Introduce Vt : ");
-x(5)= input("Introduce h : ");
-gamma=input("Introduce Gamma (deg.) : ")/57.29578;
-output_filename= input("¿Nombre del archivo de salida? : ", "s") ;
+vt    = 502*0.3048;
+h     = 0;
+gamma = 0;
+TR    = 0;
+PU    = 0.1;
+xcg   = -0.3;
 
-cg= 0.25;
-u=[0.1 -10 cg land];
-x(2)=.1;                        % Alpha, initial guess
-x(3)=x(2) +gamma;               % Theta
-x(4)=0;                         % Pitch rate
-x(6)=0;
-s0=[u(1) u(2) x(2)];
-[s,fval]=fminsearch(objetivo,s0) ;
-x(2)=s(3); x(3)=s(3)+gamma;
-u(1)=s(1); u(2)=s(2) ;
-trim_solution=[length(x),length(u),x,u];
-dlmwrite(output_filename,trim_solution);
+[geom, I] = F16();
+s0 = [0.3 4.1e-5 -7 -6.2e-4 0.01655 1];
 
+f = @(y) cost(y, geom, I, xcg, h, vt, gamma, TR);
+[strim,fval]=fsolve(f,s0);
 
+[xtrim, utrim]  = s_to_x_u(strim, h, vt, gamma, TR);
 
-function out = objetivo(s, filtro)
-    parameter (nn=20)
-    real s(*)
-    common/state/x(nn),xd(nn)
-    common/controls/thtl,el,ail,rdr
-    thtl = s(1)
-    el = s(2)
-    x(2) = s(3)
-    ail = s(4)
-    rdr = s(5)
-    x(3) = s(6)
-    x(13)= tgear(thtl)
-    x = ligaduras(x);
-    xd = sistema(x, u);
-    out = dot(xd.*filtro, xd);
-end
+ xd_trim = xdf(xtrim, utrim, geom, I, xcg);
+ 
+ trim_V = [xtrim(1)/0.3048 xtrim(2) xtrim(5) xtrim(8) xtrim(4) xtrim(6) xtrim(3) xtrim(7) utrim(4) utrim(1) utrim(2) utrim(3)]';
