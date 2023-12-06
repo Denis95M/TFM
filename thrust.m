@@ -25,35 +25,17 @@ function out= thrust(pow,h,Mach)
          26070.0, 21075.0, 15975.0, 11115.0, 6860.0, 3950.0;...
          28886.0, 23319.0, 18300.0, 13484.0, 8642.0, 5057.0];
     h = h*3.28084; %Convertimos metros a pies
-    H = .0001*h;
-    I = floor(H);
-    if I>= 5
-        I = 4;
-    end
-
-    DH = H-I;
-    RM = 5.0*Mach;
-    M = floor(RM);
-    if M>= 5
-        M = 4;
-    end
-
-    DM = RM-M;
-    CDH = 1.0-DH;
-    S = B(M+1,I+1) * CDH + B(M+1,I+2) * DH;
-    T = B(M+2,I+1) * CDH + B(M+2,I+2) * DH;
-    TMIL = S + (T-S)*DM;
-
-    if pow <50
-        S = A(M+1,I+1) * CDH + A(M+1,I+2) * DH;
-        T = A(M+2,I+1) * CDH + A(M+2,I+2) * DH;
-        TIDL = S + (T-S)*DM;
-        out = TIDL+(TMIL-TIDL)*pow*.02;
-    else
-        S = C(M+1,I+1) * CDH + C(M+1,I+2) * DH;
-        T = C(M+2,I+1) * CDH + C(M+2,I+2) * DH;
-        TMAX = S + (T-S)*DM;
-        out = TMIL+(TMAX-TMIL)*(pow-50.0)*0.02;
-    end
+    
+    h_vec = 0:10000:50000;
+    M_vec = 0:0.2:1;
+    
+    A_interp = interp2(h_vec, M_vec, A, h, Mach);
+    B_interp = interp2(h_vec, M_vec, B, h, Mach);
+    C_interp = interp2(h_vec, M_vec, C, h, Mach);
+    
+    pow_vec = [0:50:100];
+    thrust_vec = [A_interp B_interp C_interp];
+    
+    out = interp1(pow_vec, thrust_vec, pow);
     out = out*4.44822162; %Convertimos libras a Newton
 end
