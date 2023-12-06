@@ -3,7 +3,7 @@ function  [CX,CY,CZ,Cl,Cm,Cn] = coef_aero(x,u,geom,xcg)
     %x=[Vt, alpha, q, theta, beta, p, r, phi, h, pow]
     %u=[delta_e, delta_a, delta_r, delta_t]
     %geom =[mass, S, b, c, XCGR, HX]
-    
+    % D = [CXq, CYr, CYp, CZq, Clr, Clp, Cmq, Cnr, Cnp]
    D = dumpf(x(2));
    
    CX = CXf(x(2), u(1)) + geom(4)/(2*x(1))*x(3)*D(1);
