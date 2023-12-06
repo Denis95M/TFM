@@ -1,7 +1,21 @@
+clear
 
-[Al,~, Ald, ~] = example();
+% Condición de vuelo para el análisis dinámico
+vt    = 502*0.3048;
+h     = 0;
+gamma = 0;
+TR    = 0;
+xcg   = 0.3;
+
+[geom, I] = F16();
+
+[A, B] = jacob(geom, I, xcg, h, vt, gamma, TR);
+
 
 % Longitudinal
+Al = A(1:4, 1:4);
+Bl = [B(1:4,1), B(1:4,4)];
+
 [Vl,Dl] = eig(Al);
 
 mod_1_l = Vl(:,1);
@@ -44,7 +58,8 @@ short_xi = -short_n/short_wn;
 
 
 %lateral-direccional
-
+Ald = A(5:8, 5:8);
+Bld = B(5:8, 2:3);
 [Vld,Dld] = eig(Ald);
 
 mod_1_ld = Vld(:,1);
@@ -71,7 +86,7 @@ if not(isreal(eig_1))
     spiral_w = imag(eig_4);
     
     
-elseif not(real(eig_2))
+elseif not(isreal(eig_2))
     dutch_mod = mod_2_ld;
     dutch_n = real(Dld(2,2));
     dutch_w = imag(Dld(2,2));
@@ -102,6 +117,9 @@ end
 dutch_T = 2*pi/dutch_w;
 dutch_wn = sqrt(dutch_n^2+dutch_w^2);
 dutch_xi = -dutch_n/dutch_wn;
+
+roll_tau = abs(1/roll_n);
+spiral_tau = abs(1/spiral_n);
 
 
 
