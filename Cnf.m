@@ -14,6 +14,6 @@ function out = Cnf(alpha, beta)
    alpha_x = -10:5:45;
    beta_x = 0:5:30;
 
-   out = interp2(alpha_x, beta_x, A, alpha, abs(beta))*beta/abs(beta);
+   out = interp2(alpha_x, beta_x, A, alpha, abs(beta))*beta/max(abs(beta),1e-10);
 
 end
