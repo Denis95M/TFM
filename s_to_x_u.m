@@ -14,12 +14,11 @@ function [x,u] = s_to_x_u(s, h, vt, gamma, TR, xe, ye)
     x(11) = ye;
     x(12) =  h;
     
+    %Giro coordinado + ritmo de ascenso
     G = TR*x(1)/9.81;
     a_tr = 1-G*tan(x(2))*sin(x(5));
     b_tr = sin(gamma)/cos(x(5));
     c_tr = 1+ G^2*cos(x(5))^2;
-    
-    %Giro coordinado + ritmo de ascenso
     tanphi = G*cos(x(5))/cos(x(2))*((a_tr-b_tr^2)+b_tr*tan(x(2))*(c_tr*(1-b_tr)^2+G^2*sin(x(5))^2)^(1/2));
     tanphi = tanphi/(a_tr^2-b_tr^2*(1+c_tr*tan(x(2))^2));
     x(8) =  atan(tanphi);
