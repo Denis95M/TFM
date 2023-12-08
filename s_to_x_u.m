@@ -1,6 +1,6 @@
-function [x,u] = s_to_x_u(s, h, vt, gamma, TR)
+function [x,u] = s_to_x_u(s, h, vt, gamma, TR, xe, ye)
 
-    x = zeros(1,10);
+    x = zeros(1,12);
     u = zeros(1,4);
     u(1) = s(3);
     u(2) = s(4);
@@ -10,8 +10,9 @@ function [x,u] = s_to_x_u(s, h, vt, gamma, TR)
     x(5) =  s(2);
     
     x(1)=   vt;
-    x(9) =  h;
-    x(10)=  throttle(s(6));
+    x(10) = xe;
+    x(11) = ye;
+    x(12) =  h;
     
     G = TR*x(1)/9.81;
     a_tr = 1-G*tan(x(2))*sin(x(5));

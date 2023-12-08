@@ -1,4 +1,4 @@
-function out= thrust(pow,h,Mach) 
+function out= thrust(delta_t,h,Mach) 
 
 % Matriz A contiene los valores de empuje del motor en régimen de ralentí.
 % Matriz B contiene los valores de empuje del motor en régimen militar.
@@ -37,6 +37,6 @@ function out= thrust(pow,h,Mach)
     pow_vec = [0:50:100];
     thrust_vec = [A_interp B_interp C_interp];
     
-    out = interp1(pow_vec, thrust_vec, pow);
+    out = interp1(pow_vec, thrust_vec, delta_t*100);
     out = out*4.44822162; %Convertimos libras a Newton
 end

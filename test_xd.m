@@ -10,15 +10,16 @@ psi = -1;
 p = 0.7;
 q = -0.8;
 r = 0.9;
+xe = 1000*0.3048;
+ye = 900*0.3048;
 h = 10000*0.3048;
-pow = 90;
 
-delta_t = 0.9;
 delta_e = 20;
 delta_a = -15;
 delta_r = -20;
+delta_t = 0.9;
 
-x = [Vt, alpha, q, theta, beta, p, r, phi, h, pow];
+x = [Vt, alpha, q, theta, beta, p, r, phi, psi, xe, ye, h];
 u = [delta_e, delta_a, delta_r, delta_t];
 
 [geom, I] = F16();
@@ -33,8 +34,10 @@ xdl(5) = xd(4);
 xdl(7) = xd(6);
 xdl(8) = xd(3);
 xdl(9) = xd(7);
-xdl(12) = xd(9)/0.3048;
-xdl(13) = xd(10);
+xdl(6)  = xd(9);
+xdl(10) = xd(10)/0.3048;
+xdl(11) = xd(11)/0.3048;
+xdl(12) = xd(12)/0.3048;
 
 xl = zeros(12,1);
 xl(1) = x(1)/0.3048;
@@ -45,8 +48,10 @@ xl(5) = x(4);
 xl(7) = x(6);
 xl(8) = x(3);
 xl(9) = x(7);
-xl(12) = x(9)/0.3048;
-xl(13) = x(10);
+xl(6)  = x(9);
+xl(10) = x(10)/0.3048;
+xl(11) = x(11)/0.3048;
+xl(12) = x(12)/0.3048;
 
 % xdl(1,2) = "vt";
 % xdl(2,2) = "alpha";
