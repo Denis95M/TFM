@@ -1,4 +1,4 @@
-function [out] = dumpf(alpha)
+function [out] = dampf(alpha)
     alpha = alpha*180/pi;
     %A contiene los valores de los coeficientes de amortiguamiento por filas
     %para AOA que van desde -10º hasta 45º de 5 en 5, según las columnas.
