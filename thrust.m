@@ -30,6 +30,7 @@ function out= thrust(delta_t,h,Mach)
     h_vec = 0:10000:50000;
     M_vec = 0:0.2:1;
     
+    % Interpolacion 2D para cada regimen de funcionamiento del motor
     A_interp = interp2(h_vec, M_vec, A, h, Mach);
     B_interp = interp2(h_vec, M_vec, B, h, Mach);
     C_interp = interp2(h_vec, M_vec, C, h, Mach);

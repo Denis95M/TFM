@@ -1,13 +1,12 @@
 function [out] = xdf(x, u, geom, I, xcg)
 
+% x=[Vt, alpha, q, theta, beta, p, r, phi, psi, xe, ye, h]
+% u=[delta_e, delta_a, delta_r, delta_t]
+% geom =[mass, S, b, c, XCG, HX]
 
-%x=[Vt, alpha, q, theta, beta, p, r, phi, psi, xe, ye, h]
-%u=[delta_e, delta_a, delta_r, delta_t]
-%geom =[mass, S, b, c, XCG, HX]
-
-%  [ Ixx Ixy Ixz ]
-%I=[ Ixy Iyy Iyz ]
-%  [ Ixz Iyz Izz ]
+%   [ Ixx Ixy Ixz ]
+% I=[ Ixy Iyy Iyz ]
+%   [ Ixz Iyz Izz ]
 
 
 [CX,CY,CZ,Cl,Cm,Cn] = coef_aero(x, u, geom, xcg);
@@ -28,8 +27,7 @@ wd = x(3)*U - x(6)*V + g*cos(x(4))*cos(x(8)) + p_din*geom(2)/geom(1)*CZ;
 
 out(1) = (U*ud + V*vd + W*wd)/x(1); %Vt dot
 out(2) = (U*wd - W*ud) / (U^2 + W^2); %alpha dot
-%out(5) = (x(1)*vd- V*out(1)) * cos(x(5)) / (U^2 + W^2); %Beta dot
-out(5) = (vd*(U^2 + W^2) - V*(U*ud + W*wd))/(x(1)^2*sqrt(U^2 + W^2));
+out(5) = (x(1)*vd- V*out(1)) * cos(x(5)) / (U^2 + W^2); %Beta dot
 
 %Ecuaciones de momento
 I_aux1 = I(1,3)*(I(1,1)-I(2,2)+I(3,3));   % XPQ
@@ -46,6 +44,7 @@ out(7) = ( I_aux3*x(6)*x(3) - I_aux1*x(3)*x(7) + I(1,3)*p_din*geom(2)*geom(3)*Cl
 out(4) = x(3)*cos(x(8)) - x(7)*sin(x(8)); %theta dot
 out(8) = x(6) + tan(x(4))*(x(3)*sin(x(8)) + x(7)*cos(x(8))); %phi dot
 out(9) = (x(3)*sin(x(8))+x(7)*cos(x(8)))/cos(x(4));
+
 %Relaciones lineales
 out(10) = U * cos(x(4))*cos(x(9)) + V * (sin(x(8))*sin(x(4))*cos(x(9)) - cos(x(8))*sin(x(9))) + W * (cos(x(8))*sin(x(4))*cos(x(9)) + sin(x(8))*sin(x(9)));
 out(11) = U * cos(x(4))*sin(x(9)) + V * (sin(x(8))*sin(x(4))*sin(x(9)) + cos(x(8))*cos(x(9))) + W * (cos(x(8))*sin(x(4))*sin(x(9)) - sin(x(8))*cos(x(9)));
