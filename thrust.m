@@ -1,8 +1,8 @@
 function out= thrust(delta_t,h,Mach) 
 
-% Matriz A contiene los valores de empuje del motor en régimen de ralentí.
-% Matriz B contiene los valores de empuje del motor en régimen militar.
-% Matriz C contiene los valores de empuje del motor en régimen de máxima potencia.
+% Matriz A contiene los valores de empuje del motor en regimen de ralenti.
+% Matriz B contiene los valores de empuje del motor en regimen militar.
+% Matriz C contiene los valores de empuje del motor en regimen de maxima potencia.
 
     A = [ 1060.0,   670.0,   880.0,  1140.0, 1500.0, 1860.0;...
            635.0,   425.0,   690.0,  1010.0, 1330.0, 1700.0;...
