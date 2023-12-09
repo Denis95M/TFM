@@ -4,8 +4,8 @@ function [geom, I] = F16()
     b = 9.144;              %[m]
     S = 27.87;              %[m2]
     cma = 3.45;             %[m]
-    xcgr = 0.35*1;
-    HX = 216.9309;          %[kg/m2 s]
+    xcgr = 0.35;
+    HX = 216.9309;          %[kg m2/ s]
 
     geom =[mass, S, b, cma, xcgr, HX];
 
