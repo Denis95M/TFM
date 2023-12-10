@@ -5,7 +5,7 @@ function  [CX,CY,CZ,Cl,Cm,Cn] = coef_aero(x,u,geom,xcg)
     % geom =[mass, S, b, c, XCGR, HX]
     % D = [CXq, CYr, CYp, CZq, Clr, Clp, Cmq, Cnr, Cnp]
    
-   D = dumpf(x(2));
+   D = dampf(x(2));
    
    CX = CXf(x(2), u(1)) + geom(4)/(2*x(1))*x(3)*D(1);
    CY = CYf(x(5), u(2), u(3)) + (D(2)*x(7)+D(3)*x(6))*geom(3)/(2*x(1));
