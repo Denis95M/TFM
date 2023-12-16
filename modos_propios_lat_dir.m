@@ -1,4 +1,4 @@
-function [dutch, dutch_mod, roll, roll_mod, spiral, spiral_mod] = modos_propios_lat_dir(A)
+function [dutch, dutch_mod, roll, roll_mod, spiral, spiral_mod, Dld, Vld] = modos_propios_lat_dir(A)
    
     Ald = A(5:8, 5:8);
     [Vld,Dld] = eig(Ald);
@@ -51,11 +51,16 @@ function [dutch, dutch_mod, roll, roll_mod, spiral, spiral_mod] = modos_propios_
     dutch_T  = 2*pi/dutch_w;
     dutch_wn = sqrt(dutch_n^2+dutch_w^2);
     dutch_xi = -dutch_n/dutch_wn;
-    dutch    = [dutch_T dutch_xi dutch_w];
+    roll_tau = 1/abs(roll_n);                       % constante de tiempos Tau
+    roll_t1_2     = -log(2)/roll_n;                 % t_1/2
+    spiral_tau = 1/abs(spiral_n);                       % constante de tiempos Tau
+    spiral_t1_2   = -log(2)/spiral_n;               % t_1/2
     
-    roll     = abs(1/roll_n);                   % Constante de tiempo tau
-    spiral   = abs(1/spiral_n);                 % Constante de tiempo tau
-    
+    dutch    = [dutch_T dutch_xi dutch_wn];
+    roll = [roll_t1_2 roll_tau];
+    spiral = [spiral_t1_2 spiral_tau];
+
+
 end
 
 

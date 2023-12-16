@@ -6,7 +6,7 @@ function [A,B,delta_conv_A,delta_conv_B,err_A,err_B] = jacob(xtrim, utrim, geom,
     delta_conv_B = zeros(8,4);
     err_A = ones(8,8);
     err_B = ones(8,4);
-    delta_0 = 0.1; 
+    delta_0 = 0.05; 
     delta_min = delta_0/2^15;
     tol = 1e-8;
     

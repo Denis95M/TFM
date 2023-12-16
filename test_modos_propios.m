@@ -13,7 +13,9 @@ psi   = 0;
 
 [xtrim, utrim] = trim(vt, h(end), gamma, TR, psi, xcg, geom, I);
 [A, B] = jacob(xtrim, utrim, geom, I, xcg);
-    
-[phug,  phug_m, short,  short_m] = modos_propios_long(A);
-[dutch, ~, roll_tau, ~, spiral_tau, ~] = modos_propios_lat_dir(A);
+ 
+%phug = [T, xi, w_n]
+%phug_m = [autovec fugoide]
+[phug,  phug_mod, short,  short_mod, Dl, Vl] = modos_propios_long(A);
+[dutch, dutch_mod , roll_t1_2, roll_mod, spiral_t1_2, spiral_mod, Dld, Vld] = modos_propios_lat_dir(A);
 
