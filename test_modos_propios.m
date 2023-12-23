@@ -17,5 +17,5 @@ psi   = 0;
 %phug = [T, xi, w_n]
 %phug_m = [autovec fugoide]
 [phug,  phug_mod, short,  short_mod, Dl, Vl] = modos_propios_long(A);
-[dutch, dutch_mod , roll_t1_2, roll_mod, spiral_t1_2, spiral_mod, Dld, Vld] = modos_propios_lat_dir(A);
+[dutch, dutch_mod , roll, roll_mod, spiral, spiral_mod, Dld, Vld] = modos_propios_lat_dir(A);
 

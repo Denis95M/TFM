@@ -51,12 +51,13 @@ function [dutch, dutch_mod, roll, roll_mod, spiral, spiral_mod, Dld, Vld] = modo
     dutch_T  = 2*pi/dutch_w;
     dutch_wn = sqrt(dutch_n^2+dutch_w^2);
     dutch_xi = -dutch_n/dutch_wn;
+    dutch_t1_2 = -log(2)/dutch_n;
     roll_tau = 1/abs(roll_n);                       % constante de tiempos Tau
     roll_t1_2     = -log(2)/roll_n;                 % t_1/2
     spiral_tau = 1/abs(spiral_n);                       % constante de tiempos Tau
     spiral_t1_2   = -log(2)/spiral_n;               % t_1/2
     
-    dutch    = [dutch_T dutch_xi dutch_wn];
+    dutch    = [dutch_T dutch_xi dutch_wn dutch_t1_2];
     roll = [roll_t1_2 roll_tau];
     spiral = [spiral_t1_2 spiral_tau];
 
