@@ -1,7 +1,7 @@
 clear
 clc
 
-% Condición de vuelo para el análisis dinámico
+% Condicion de vuelo para el analisis dinamico
 vt    = 140;
 h     = 1000;
 gamma = 0*pi/180;
