@@ -32,35 +32,30 @@ systf_long = tf(sys_long);
 FontSizeTitle=12;
 FontSizeAxis=10;
 LineWidth=2;
-opt = timeoptions;
-opt.Normalize = 'off';
-Config1 = stepDataOptions('InputOffset',0,'stepAmplitude',1);
 figure(1);
 hold on
-stepplot(systf_long(1,1), opt, Config1); % respuesta Vt para delta_e
+opt = RespConfig('Delay', 50);
+impulse(systf_long(1,1), opt); % respuesta Vt para delta_e
 yyaxis right
-stepplot(systf_long(2,1), opt, Config1); % respuesta alpha para delta_e    
-stepplot(systf_long(3,1), opt, Config1); % respuesta q para delta_e    
-stepplot(systf_long(4,1), opt, Config1); % respuesta theta para delta_e 
+impulse(systf_long(2,1), opt); % respuesta alpha para delta_e  
+impulse(systf_long(3,1), opt); % respuesta q para delta_e    
+impulse(systf_long(4,1), opt); % respuesta theta para delta_e 
 legend('Vt','alpha', 'q', 'theta')
-title('Admitancia impulsional timon de profundidad','Fontsize',FontSizeTitle);
-ylabel('Amplitud','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
+title('Admitancia impulsional timón de profundidad','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
 saveas(gcf,['impulso_delta_e.jpg']);
 
-Config2 = stepDataOptions('InputOffset',0,'stepAmplitude',0.1);
 figure(2)
 hold on
-stepplot(systf_long(1,2),opt, Config2); % respuesta Vt para delta_t
+impulseplot(systf_long(1,2), opt); % respuesta Vt para delta_t
 yyaxis right
-stepplot(systf_long(2,2), opt, Config2); % respuesta alpha para delta_t    
-stepplot(systf_long(3,2), opt, Config2); % respuesta q para delta_t    
-stepplot(systf_long(4,2), opt, Config2); % respuesta theta para delta_t 
+impulseplot(systf_long(2,2), opt); % respuesta alpha para delta_t    
+impulseplot(systf_long(3,2), opt); % respuesta q para delta_t    
+impulseplot(systf_long(4,2), opt); % respuesta theta para delta_t 
 legend('Vt','alpha', 'q', 'theta')
 title('Admitancia impulsional ratio de potencia','Fontsize',FontSizeTitle);
-ylabel('Amplitud','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -74,40 +69,34 @@ saveas(gcf,['impulso_delta_t.jpg']);
 
 sys_ld=ss(Ald,Bld,C,D); 
 systf_ld=tf(sys_ld); 
-opt = timeoptions;
-opt.Normalize = 'off';
-Config3 = stepDataOptions('InputOffset',0,'stepAmplitude',1);
+
 figure(3)
 hold on
-stepplot(systf_ld(1,1), opt, Config3); % respuesta beta para delta_a
-%yyaxis right
-stepplot(systf_ld(2,1), opt, Config3); % respuesta p para delta_a    
-stepplot(systf_ld(3,1), opt, Config3); % respuesta r para delta_a    
-stepplot(systf_ld(4,1), opt, Config3); % respuesta phi para delta_a 
+impulseplot(systf_ld(1,1), opt); % respuesta beta para delta_a
+impulseplot(systf_ld(2,1), opt); % respuesta p para delta_a    
+impulseplot(systf_ld(3,1), opt); % respuesta r para delta_a    
+impulseplot(systf_ld(4,1), opt); % respuesta phi para delta_a 
 legend('beta','p', 'r', 'phi')
-title('Admitancia impulsional alerones','Fontsize',FontSizeTitle);
-ylabel('Amplitud','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
+title('Admitancia impulsional deflexión alerones','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
 saveas(gcf,['impulso_delta_a.jpg']);
-Config4 = stepDataOptions('InputOffset',0,'stepAmplitude',1);
+
 figure(4)
 hold on
-stepplot(systf_ld(1,2),opt, Config4); % respuesta beta para delta_r
-%yyaxis right
-stepplot(systf_ld(2,2), opt, Config4); % respuesta p para delta_r    
-stepplot(systf_ld(3,2), opt, Config4); % respuesta r para delta_r    
-stepplot(systf_ld(4,2), opt, Config4); % respuesta phi para delta_r 
+impulseplot(systf_ld(1,2),opt); % respuesta beta para delta_r
+impulseplot(systf_ld(2,2), opt); % respuesta p para delta_r    
+impulseplot(systf_ld(3,2), opt); % respuesta r para delta_r    
+impulseplot(systf_ld(4,2), opt); % respuesta phi para delta_r 
 legend('beta','p', 'r', 'phi')
-title('Admitancia impulsional timon de direccion','Fontsize',FontSizeTitle);
-ylabel('Amplitud','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
+title('Admitancia impulsional timón de dirección','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
 saveas(gcf,['impulso_delta_r.jpg']);
 
-%Obtencion polos y ceros del sistema y su representación
+%Obtencion polos y ceros del sistema y su representacion
 [z_delta_e, p_long, k_delta_e] = tf2zp(num_delta_e, den_long);
 [z_delta_t, ~, k_delta_t] = tf2zp(num_delta_t, den_long);
 
@@ -132,12 +121,11 @@ saveas(gcf,['impulso_delta_r.jpg']);
 % figure(12)
 % zplane(num_delta_a(4,:), den_lat)
 
-%Diagramas de Bode
+% Diagramas de Bode
 f13=figure(13);
 b_long=bodeplot(sys_long);
 title('Diagrama de Bode movimiento longitudinal','Fontsize',FontSizeTitle);
 xlabel('Frecuencia','Fontsize',FontSizeAxis) % Etiqueta el eje horizontal
-%ylabel('Magnitud [dB]       Fase [deg]','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 p = getoptions(b_long);
@@ -150,7 +138,6 @@ figure(14)
 b_ld = bodeplot(sys_ld);
 title('Diagrama de Bode movimiento lateral y direccional','Fontsize',FontSizeTitle);
 xlabel('Frecuencia','Fontsize',FontSizeAxis) % Etiqueta el eje horizontal
-%ylabel('Amplitud','Fontsize',FontSizeAxis) % Etiqueta el eje vertical
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 p = getoptions(b_ld);
