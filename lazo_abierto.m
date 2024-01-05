@@ -43,16 +43,16 @@ k_ld = dcgain(sys_ld);
 figure(1);
 hold on
 opt = RespConfig('Delay', 50);
-imp=stepplot(systf_long(1,1), opt); % respuesta Vt para delta_e
+imp=impulseplot(systf_long(1,1), opt); % respuesta Vt para delta_e
 yyaxis right
-stepplot(systf_long(2,1), opt); % respuesta alpha para delta_e  
-stepplot(systf_long(3,1), opt); % respuesta q para delta_e    
-stepplot(systf_long(4,1), opt); % respuesta theta para delta_e 
+impulseplot(systf_long(2,1), opt); % respuesta alpha para delta_e  
+impulseplot(systf_long(3,1), opt); % respuesta q para delta_e    
+impulseplot(systf_long(4,1), opt); % respuesta theta para delta_e 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud Vt';
 setoptions(imp,imp_opt)
 legend('Vt','\alpha', 'q', '\theta')
-title('Admitancia índice timón de profundidad','Fontsize',FontSizeTitle);
+title('Admitancia impulsional timón de profundidad','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -67,16 +67,16 @@ saveas(gcf,['impulso_delta_e.jpg']);
 figure(2)
 hold on
 opt.Amplitude = 0.05;
-imp=stepplot(systf_long(1,2), opt); % respuesta Vt para delta_t
+imp=impulseplot(systf_long(1,2), opt); % respuesta Vt para delta_t
 yyaxis right
-stepplot(systf_long(2,2), opt); % respuesta alpha para delta_t    
-stepplot(systf_long(3,2), opt); % respuesta q para delta_t    
-stepplot(systf_long(4,2), opt); % respuesta theta para delta_t 
+impulseplot(systf_long(2,2), opt); % respuesta alpha para delta_t    
+impulseplot(systf_long(3,2), opt); % respuesta q para delta_t    
+impulseplot(systf_long(4,2), opt); % respuesta theta para delta_t 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud Vt';
 setoptions(imp,imp_opt)
 legend('Vt','\alpha', 'q', '\theta')
-title('Admitancia índice ratio de potencia','Fontsize',FontSizeTitle);
+title('Admitancia impulsional ratio de potencia','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -98,15 +98,15 @@ saveas(gcf,['impulso_delta_t.jpg']);
 figure(3)
 hold on
 opt.Amplitude = 1;
-imp=stepplot(systf_ld(1,1), opt); % respuesta beta para delta_a
-stepplot(systf_ld(2,1), opt); % respuesta p para delta_a    
-stepplot(systf_ld(3,1), opt); % respuesta r para delta_a    
-stepplot(systf_ld(4,1), opt); % respuesta phi para delta_a 
+imp=impulseplot(systf_ld(1,1), opt); % respuesta beta para delta_a
+impulseplot(systf_ld(2,1), opt); % respuesta p para delta_a    
+impulseplot(systf_ld(3,1), opt); % respuesta r para delta_a    
+impulseplot(systf_ld(4,1), opt); % respuesta phi para delta_a 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud';
 setoptions(imp,imp_opt)
 legend('\beta','p', 'r', '\phi')
-title('Admitancia índice deflexión alerones','Fontsize',FontSizeTitle);
+title('Admitancia impulsional deflexión alerones','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -118,15 +118,15 @@ saveas(gcf,['impulso_delta_a.jpg']);
 
 figure(4)
 hold on
-imp=stepplot(systf_ld(1,2),opt); % respuesta beta para delta_r
-stepplot(systf_ld(2,2), opt); % respuesta p para delta_r    
-stepplot(systf_ld(3,2), opt); % respuesta r para delta_r    
-stepplot(systf_ld(4,2), opt); % respuesta phi para delta_r 
+imp=impulseplot(systf_ld(1,2),opt); % respuesta beta para delta_r
+impulseplot(systf_ld(2,2), opt); % respuesta p para delta_r    
+impulseplot(systf_ld(3,2), opt); % respuesta r para delta_r    
+impulseplot(systf_ld(4,2), opt); % respuesta phi para delta_r 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud';
 setoptions(imp,imp_opt)
 legend('\beta','p', 'r', '\phi')
-title('Admitancia índice timón de dirección','Fontsize',FontSizeTitle);
+title('Admitancia impulsional timón de dirección','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
