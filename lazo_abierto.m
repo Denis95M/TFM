@@ -10,6 +10,10 @@ TR    = 0;
 xcg   = 0.3;
 psi   = 0;
 
+FontSizeTitle=12;
+FontSizeAxis=10;
+LineWidth=2;
+
 [geom, I] = F16();
 
 [xtrim, utrim] = trim(vt, h(end), gamma, TR, psi, xcg, geom, I);
@@ -21,44 +25,63 @@ Bld = B(5:8, 2:3);
 D = zeros(4, 2);
 C = eye(4);
 
+sys_long = ss(Al,Bl,C,D); 
+systf_long = tf(sys_long); 
+
+sys_ld=ss(Ald,Bld,C,D); 
+systf_ld=tf(sys_ld); 
+
+%Respuesta entrada escalon unitario mov. longitudinal
 %Obtencion funciones de transferencia mov. longitudinal
 [num_delta_e,den_long] = ss2tf(Al,Bl,C,D,1);
 [num_delta_t,~] = ss2tf(Al,Bl,C,D,2);
 
-%Respuesta entrada escalon unitario mov. longitudinal
-
-sys_long = ss(Al,Bl,C,D); 
-systf_long = tf(sys_long); 
-FontSizeTitle=12;
-FontSizeAxis=10;
-LineWidth=2;
 figure(1);
 hold on
 opt = RespConfig('Delay', 50);
-impulse(systf_long(1,1), opt); % respuesta Vt para delta_e
+imp=impulseplot(systf_long(1,1), opt); % respuesta Vt para delta_e
 yyaxis right
-impulse(systf_long(2,1), opt); % respuesta alpha para delta_e  
-impulse(systf_long(3,1), opt); % respuesta q para delta_e    
-impulse(systf_long(4,1), opt); % respuesta theta para delta_e 
-legend('Vt','alpha', 'q', 'theta')
+impulseplot(systf_long(2,1), opt); % respuesta alpha para delta_e  
+impulseplot(systf_long(3,1), opt); % respuesta q para delta_e    
+impulseplot(systf_long(4,1), opt); % respuesta theta para delta_e 
+imp_opt = getoptions(imp);
+imp_opt.YLabel.String = 'Amplitud Vt';
+setoptions(imp,imp_opt)
+legend('Vt','\alpha', 'q', '\theta')
 title('Admitancia impulsional timón de profundidad','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
+a=gca;
+a.YAxis(1).Color = [0 0 0];
+a.YAxis(2).Color = [0 0 0];
+a.XAxis.Color = [0 0 0];
+a.ZAxis.Color = [0 0 0];
+a.YAxis(2).Label.String = 'Amplitud \alpha, q, \theta';
 saveas(gcf,['impulso_delta_e.jpg']);
 
 figure(2)
 hold on
-impulseplot(systf_long(1,2), opt); % respuesta Vt para delta_t
+imp=impulseplot(systf_long(1,2), opt); % respuesta Vt para delta_t
 yyaxis right
 impulseplot(systf_long(2,2), opt); % respuesta alpha para delta_t    
 impulseplot(systf_long(3,2), opt); % respuesta q para delta_t    
 impulseplot(systf_long(4,2), opt); % respuesta theta para delta_t 
-legend('Vt','alpha', 'q', 'theta')
+imp_opt = getoptions(imp);
+imp_opt.YLabel.String = 'Amplitud Vt';
+setoptions(imp,imp_opt)
+legend('Vt','\alpha', 'q', '\theta')
 title('Admitancia impulsional ratio de potencia','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
+g=gcf;
+a=gca;
+a.YAxis(1).Color = [0 0 0];
+a.YAxis(2).Color = [0 0 0];
+a.XAxis.Color = [0 0 0];
+a.ZAxis.Color = [0 0 0];
+a.YAxis(2).Label.String = 'Amplitud \alpha, q, \theta';
 saveas(gcf,['impulso_delta_t.jpg']);
 
 %Obtencion funciones de transferencia mov. lat-dir
@@ -67,33 +90,44 @@ saveas(gcf,['impulso_delta_t.jpg']);
 
 %Respuesta entrada escalon unitario mov. lat-dir
 
-sys_ld=ss(Ald,Bld,C,D); 
-systf_ld=tf(sys_ld); 
-
 figure(3)
 hold on
-impulseplot(systf_ld(1,1), opt); % respuesta beta para delta_a
+imp=impulseplot(systf_ld(1,1), opt); % respuesta beta para delta_a
 impulseplot(systf_ld(2,1), opt); % respuesta p para delta_a    
 impulseplot(systf_ld(3,1), opt); % respuesta r para delta_a    
 impulseplot(systf_ld(4,1), opt); % respuesta phi para delta_a 
-legend('beta','p', 'r', 'phi')
+imp_opt = getoptions(imp);
+imp_opt.YLabel.String = 'Amplitud Vt';
+setoptions(imp,imp_opt)
+legend('\beta','p', 'r', '\phi')
 title('Admitancia impulsional deflexión alerones','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
+a=gca;
+a.YAxis.Color = [0 0 0];
+a.XAxis.Color = [0 0 0];
+a.ZAxis.Color = [0 0 0];
 saveas(gcf,['impulso_delta_a.jpg']);
 
 figure(4)
 hold on
-impulseplot(systf_ld(1,2),opt); % respuesta beta para delta_r
+imp=impulseplot(systf_ld(1,2),opt); % respuesta beta para delta_r
 impulseplot(systf_ld(2,2), opt); % respuesta p para delta_r    
 impulseplot(systf_ld(3,2), opt); % respuesta r para delta_r    
 impulseplot(systf_ld(4,2), opt); % respuesta phi para delta_r 
-legend('beta','p', 'r', 'phi')
+imp_opt = getoptions(imp);
+imp_opt.YLabel.String = 'Amplitud Vt';
+setoptions(imp,imp_opt)
+legend('\beta','p', 'r', '\phi')
 title('Admitancia impulsional timón de dirección','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
+a=gca;
+a.YAxis.Color = [0 0 0];
+a.XAxis.Color = [0 0 0];
+a.ZAxis.Color = [0 0 0];
 saveas(gcf,['impulso_delta_r.jpg']);
 
 %Obtencion polos y ceros del sistema y su representacion
@@ -122,25 +156,8 @@ saveas(gcf,['impulso_delta_r.jpg']);
 % zplane(num_delta_a(4,:), den_lat)
 
 % Diagramas de Bode
-f13=figure(13);
-b_long=bodeplot(sys_long);
-title('Diagrama de Bode movimiento longitudinal','Fontsize',FontSizeTitle);
-xlabel('Frecuencia','Fontsize',FontSizeAxis) % Etiqueta el eje horizontal
-set(gcf, 'Position',  [100, 100, 1000, 800]);
-set(findall(gcf,'type','line'),'linewidth',LineWidth);
-p = getoptions(b_long);
-p.YLabel.String = {"Magnitud", "Fase"};
-setoptions(b_long,p);
-f13_c = f13.Children(1).Children ;
-saveas(gcf,['bode_long.jpg']);
+custom_bodeplot(sys_long,{'\delta_e','\delta_t'},{'Vt','\alpha','q','\theta'},'Diagrama de Bode movimiento longitudinal',13, 'bode_long.jpg');
 
-figure(14)
-b_ld = bodeplot(sys_ld);
-title('Diagrama de Bode movimiento lateral y direccional','Fontsize',FontSizeTitle);
-xlabel('Frecuencia','Fontsize',FontSizeAxis) % Etiqueta el eje horizontal
-set(gcf, 'Position',  [100, 100, 1000, 800]);
-set(findall(gcf,'type','line'),'linewidth',LineWidth);
-p = getoptions(b_ld);
-p.YLabel.String = {"Magnitud", "Fase"};
-setoptions(b_ld,p);
-saveas(gcf,['bode_lat_dir.jpg']);
+custom_bodeplot(sys_ld,{'\delta_a','\delta_r'},{'\beta','p','r','\phi'},'Diagrama de Bode movimiento lateral - direccional',14, 'bode_lat_dir.jpg');
+
+close all
