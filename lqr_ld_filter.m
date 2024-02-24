@@ -25,33 +25,46 @@ LineWidth=2;
 Ald = A(5:8, 5:8);
 Bld = B(5:8, 2:3);
 Dld = zeros(4, 2);
-Cld = diag([1,1,1,1]);
+Cld = diag([1,1,1, 1]);
 avion = ss(Ald, Bld, Cld, Dld);
 
+%Inclusion del filtro washout en r
+aw = -1/tauw;
+bw = [0 0 1/tauw 0];
+cw = [0; 0; -1; 0; 1];
+dw = [eye(4); 0 0 0 0];
+washout = ss(aw, bw, cw, dw);
+filtrado = series(avion, washout);
+[Aldf,Bldf,Cldf,Dldf] = ssdata(filtrado);
 
-Q=diag([2 1 2 1]);
-R=eye(2);
-rank(obsv(sqrt(Q),Ald))
+%Reordenación para poner xw el último estado
+Aldf = Aldf([2 3 4 5 1],[2 3 4 5 1]);
+Bldf = Bldf([2 3 4 5 1],:);
+Cldf = Cldf(:,[2 3 4 5 1]);
+filtrado = ss(Aldf,Bldf,Cldf,Dldf);
+
+%Definicion de la estructura de Q y de R
+Q=diag([5 2 10 1 0]);
+R=[1 0;0 1];
+rank(obsv(sqrt(Q),Aldf))
 
 %Obtención de la respuesta del sistema controlado para diferentes q
-q=[0 100 250 500];
-t = linspace(0, 20, 10001);
+q=[0 100 200 300 400 500];
+t = linspace(0, 10, 10001);
 u = zeros(length(t),2);
-x0 = [1 0.1 0.1 1];
-y=zeros(length(t),length(Ald),length(q));
+x0 = [30*pi/180 0 0 0 0];
+y=zeros(length(t),length(Aldf),length(q));
 y_controles=zeros(length(t),2,length(q));
 for i=1:length(q)
     if q(i)==0
-        K=zeros(2,length(Ald));
+        K=zeros(2,length(Aldf));
     else
-        K = lqr(avion,q(i)*Q,R);
+        K = lqr(filtrado,q(i)*Q,R);
     end
-    A_lqr = Ald-Bld*K;
-    controlado = ss(A_lqr,Bld,Cld,Dld);
-    figure(i+10)
-    pzplot(controlado)
+    A_lqr = Aldf-Bldf*K;
+    controlado = ss(A_lqr,Bldf,Cldf,Dldf);
     y(:,:,i) = lsim(controlado,u,t,x0);
-    y_controles(:,:,i) = lsim(ss(0,zeros(1,length(Ald)),[0; 0],K),y(:,:,i),t,0);
+    y_controles(:,:,i) = lsim(ss(0,zeros(1,length(Aldf)),[0; 0],K),y(:,:,i),t,0);
 end
 variables = {' \beta', ' p', ' r', ' \phi'};
 figure(1);
