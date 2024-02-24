@@ -1,7 +1,7 @@
 clc
 clear
-vt    = 502*0.3048;
-h     = 0;
+vt    = 140;
+h     = 1000;
 gamma = 0;
 TR    = 0;
 psi   = 0;

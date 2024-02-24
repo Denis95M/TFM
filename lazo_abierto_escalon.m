@@ -43,16 +43,16 @@ k_ld = dcgain(sys_ld);
 figure(1);
 hold on
 opt = RespConfig('Delay', 50, 'Amplitude', 1);
-imp=stepplot(systf_long(1,1), opt); % respuesta Vt para delta_e
+imp=stepplot(sys_long(1,1), opt); % respuesta Vt para delta_e
 yyaxis right
-stepplot(systf_long(2,1), opt); % respuesta alpha para delta_e  
-stepplot(systf_long(3,1), opt); % respuesta q para delta_e    
-stepplot(systf_long(4,1), opt); % respuesta theta para delta_e 
+stepplot(sys_long(2,1), opt); % respuesta alpha para delta_e  
+stepplot(sys_long(3,1), opt); % respuesta q para delta_e    
+stepplot(sys_long(4,1), opt); % respuesta theta para delta_e 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud Vt';
 setoptions(imp,imp_opt)
 legend('Vt','\alpha', 'q', '\theta')
-title('Respuesta lazo abierto ante entrada escalón \delta_e','Fontsize',FontSizeTitle);
+title('Respuesta lazo abierto ante entrada escalon \delta_e','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -68,16 +68,16 @@ saveas(gcf,['escalon_delta_e.jpg']);
 figure(2)
 hold on
 opt.Amplitude = 0.1;
-imp=stepplot(systf_long(1,2), opt); % respuesta Vt para delta_t
+imp=stepplot(sys_long(1,2), opt); % respuesta Vt para delta_t
 yyaxis right
-stepplot(systf_long(2,2), opt); % respuesta alpha para delta_t    
-stepplot(systf_long(3,2), opt); % respuesta q para delta_t    
-stepplot(systf_long(4,2), opt); % respuesta theta para delta_t 
+stepplot(sys_long(2,2), opt); % respuesta alpha para delta_t    
+stepplot(sys_long(3,2), opt); % respuesta q para delta_t    
+stepplot(sys_long(4,2), opt); % respuesta theta para delta_t 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud Vt';
 setoptions(imp,imp_opt)
 legend('Vt','\alpha', 'q', '\theta')
-title('Respuesta lazo abierto ante entrada escalón \delta_t','Fontsize',FontSizeTitle);
+title('Respuesta lazo abierto ante entrada escalon \delta_t','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -99,16 +99,16 @@ saveas(gcf,['escalon_delta_t.jpg']);
 figure(3)
 hold on
 opt.Amplitude = 1;
-imp=stepplot(systf_ld(1,1), opt); % respuesta beta para delta_a
-stepplot(systf_ld(2,1), opt); % respuesta p para delta_a    
-stepplot(systf_ld(3,1), opt); % respuesta r para delta_a 
+imp=stepplot(sys_ld(1,1), opt); % respuesta beta para delta_a
+stepplot(sys_ld(2,1), opt); % respuesta p para delta_a    
+stepplot(sys_ld(3,1), opt); % respuesta r para delta_a 
 yyaxis right
-stepplot(systf_ld(4,1), opt); % respuesta phi para delta_a 
+stepplot(sys_ld(4,1), opt); % respuesta phi para delta_a 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud \beta, p, r';
 setoptions(imp,imp_opt)
 legend('\beta','p', 'r', '\phi')
-title('Respuesta lazo abierto ante entrada escalón \delta_a','Fontsize',FontSizeTitle);
+title('Respuesta lazo abierto ante entrada escalon \delta_a','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
@@ -123,16 +123,16 @@ saveas(gcf,['escalon_delta_a.jpg']);
 
 figure(4)
 hold on
-imp=stepplot(systf_ld(1,2),opt); % respuesta beta para delta_r
-stepplot(systf_ld(2,2), opt); % respuesta p para delta_r    
-stepplot(systf_ld(3,2), opt); % respuesta r para delta_r 
+imp=stepplot(sys_ld(1,2),opt); % respuesta beta para delta_r
+stepplot(sys_ld(2,2), opt); % respuesta p para delta_r    
+stepplot(sys_ld(3,2), opt); % respuesta r para delta_r 
 yyaxis right
-stepplot(systf_ld(4,2), opt); % respuesta phi para delta_r 
+stepplot(sys_ld(4,2), opt); % respuesta phi para delta_r 
 imp_opt = getoptions(imp);
 imp_opt.YLabel.String = 'Amplitud \beta, p, r';
 setoptions(imp,imp_opt)
 legend('\beta','p', 'r', '\phi')
-title('Respuesta lazo abierto ante entrada escalón \delta_r','Fontsize',FontSizeTitle);
+title('Respuesta lazo abierto ante entrada escalon \delta_r','Fontsize',FontSizeTitle);
 set(gcf, 'Position',  [100, 100, 1000, 800]);
 set(findall(gcf,'type','line'),'linewidth',LineWidth);
 set(findall(gcf, 'String', 'Time (seconds)'), 'String', 'Tiempo [s]');
