@@ -1,7 +1,12 @@
-lqr_ld_filter
+lqr_ld
 
-K_ld_lqr = K(:,:,4);
-K_ld_ap = [0 -3.73 0 0 0 0 0; 0 0 -19.8 0 0 0 0];
+tau_a = 1/20.2;
+[sys_ld, Alda, Blda, Clda, Dlda] = actuador(sys_ld, tau_a, 2);
+
+p=[-1.25+2.165i, -1.25-2.165i, -5, -0.067, -1/tau_a, -1/tau_a];
+
+K_ld_ap = place(Alda, Blda, p);
+K_ld_lqr = K(:,4)';
 
 A_ld_lqr = Aldf - Bldf*K_ld_lqr*Cldf;
 A_ld_ap = Aldf - Bldf*K_ld_ap*Cldf;

@@ -1,4 +1,4 @@
-lqr_ld_filter
+lqr_ld
 FontSizeTitle=12;
 FontSizeAxis=10;
 LineWidth=2;

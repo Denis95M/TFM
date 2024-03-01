@@ -1,5 +1,5 @@
 espacio_estado_cr
-[sys_lda, Alda, Blda, Clda, Dlda] = actuador(sys_ld,1/20.2);
+[sys_lda, Alda, Blda, Clda, Dlda] = actuador(sys_ld,1/20.2,2);
 
 
 % Definicion de la estructura de Q y de R
