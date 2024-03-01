@@ -2,11 +2,11 @@ clear
 clc
 
 % Condición de vuelo para el análisis dinámico
-vt    = [130:10:180];
-h     = [0:5000:25000]*0.3048;
-gamma = [0:2:10]*pi/180;
+vt    = 130:10:180;
+h     = 0:5000:25000*0.3048;
+gamma = 0:2:10*pi/180;
 TR    = 0;
-xcg   = [-0.35:0.35:0.70];
+xcg   = -0.35:0.35:0.70;
 psi   = 0;
 
 [geom, I] = F16();

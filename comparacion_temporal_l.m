@@ -6,7 +6,7 @@ tau_a = 1/20.2;
 p=[-2.7+1.308i, -2.7-1.308i, -0.0665+0.0698i, -0.0665-0.0698i, -1/tau_a];
 
 K_l_ap = place(Ala, Bla, p);
-K_l_lqr = K(:,4)';
+K_l_lqr = K(:,3)';
 
 A_l_ap = Ala-Bla*K_l_ap*Cla;
 A_l_lqr = Ala-Bla*K_l_lqr*Cla;
@@ -44,7 +44,7 @@ for j=1:4
     plot(t_l,y_l_lqr(:,j),'DisplayName','LQR','linewidth',LineWidth); 
         
     legend()
-    set(gcf, 'Position',  [0, 0, 800, 600]);
+    set(gcf, 'Position',  [100, 100, 1000, 800]);
     a=gca;
     a.YAxis.Color = [0 0 0]; 
     a.XAxis.Color = [0 0 0];
@@ -53,8 +53,9 @@ for j=1:4
     xlabel('Tiempo [s]')
     grid on
 end
+saveas(gcf,'comparacion_l_x.jpg');
 
-figure(3);
+figure(2);
 title('Deflexión de \delta_e','Fontsize',FontSizeTitle);
 hold on
 
@@ -62,13 +63,13 @@ plot(t_l,y_l_ap(:,5),'DisplayName','asig. polos','linewidth',LineWidth);
 plot(t_l,y_l_lqr(:,5),'DisplayName','lqr','linewidth',LineWidth); 
    
 legend()
-set(gcf, 'Position',  [0, 0, 800, 600]);
+set(gcf, 'Position',  [100, 100, 1000, 800]);
 a=gca;
 a.YAxis.Color = [0 0 0]; 
 a.XAxis.Color = [0 0 0];
 a.ZAxis.Color = [0 0 0];
-ylabel(strcat('Amplitud [\delta_e]'))
+ylabel(strcat('Amplitud [º]'))
 xlabel('Tiempo [s]')
 grid on
 
-saveas(gcf,'x_lqr.jpg');
+saveas(gcf,'comparacion_l_u.jpg');
