@@ -1,5 +1,5 @@
 function  [CX,CY,CZ,Cl,Cm,Cn] = coef_aero(x,u,geom,xcg)
-   % Se calculan los coeficientes aerodinamicos de fuerzas y momentos
+   % Se calculan los coeficientes aerodinámicos de fuerzas y momentos
    % x=[Vt, alpha, q, theta, beta, p, r, phi, h, pow]
    % u=[delta_e, delta_a, delta_r, delta_t]
    % geom =[mass, S, b, c, XCGR, HX]

@@ -1,12 +1,12 @@
 lqr_long
 
-% Calculo de la matriz de ganancias por asignacion de polos
+% Cálculo de la matriz de ganancias por asignación de polos
 tau_a = 1/20.2;
 [sys_long, Ala, Bla, Cla, Dla] = actuador(sys_long, tau_a, 1);
 p=[-2.7+1.308i, -2.7-1.308i, -0.0665+0.0698i, -0.0665-0.0698i, -1/tau_a];
 K_l_ap = place(Ala, Bla, p);    
 
-K_l_lqr = K(:,3)';  % Seleccion de K para el q_LQR elegido
+K_l_lqr = K(:,3)';  % Selección de K para el q_LQR elegido
 
 A_l_ap = Ala-Bla*K_l_ap*Cla;
 A_l_lqr = Ala-Bla*K_l_lqr*Cla;

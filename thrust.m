@@ -1,8 +1,8 @@
 function out= thrust(delta_t,h,Mach) 
 
-% Matriz A contiene los valores de empuje del motor en regimen de ralenti.
-% Matriz B contiene los valores de empuje del motor en regimen militar.
-% Matriz C contiene los valores de empuje del motor en regimen de maxima potencia.
+% Matriz A contiene los valores de empuje del motor en régimen de ralentí.
+% Matriz B contiene los valores de empuje del motor en régimen militar.
+% Matriz C contiene los valores de empuje del motor en régimen de máxima potencia.
 
     A = [ 1060.0,   670.0,   880.0,  1140.0, 1500.0, 1860.0;...
            635.0,   425.0,   690.0,  1010.0, 1330.0, 1700.0;...
@@ -25,12 +25,12 @@ function out= thrust(delta_t,h,Mach)
          26070.0, 21075.0, 15975.0, 11115.0, 6860.0, 3950.0;...
          28886.0, 23319.0, 18300.0, 13484.0, 8642.0, 5057.0];
    
-    h = h*3.28084; %Convertimos metros a pies
+    h = h*3.28084; % Conversión metros a pies
     
     h_vec = 0:10000:50000;
     M_vec = 0:0.2:1;
     
-    % Interpolacion 2D para cada regimen de funcionamiento del motor
+    % Interpolación 2D para cada régimen de funcionamiento del motor
     A_interp = interp2(h_vec, M_vec, A, h, Mach);
     B_interp = interp2(h_vec, M_vec, B, h, Mach);
     C_interp = interp2(h_vec, M_vec, C, h, Mach);
@@ -39,5 +39,5 @@ function out= thrust(delta_t,h,Mach)
     thrust_vec = [A_interp B_interp C_interp];
     
     out = interp1(pow_vec, thrust_vec, delta_t*100);
-    out = out*4.44822162; %Convertimos libras a Newton
+    out = out*4.44822162; % Conversión libras a Newton
 end

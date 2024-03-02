@@ -3,7 +3,7 @@ function [out] = residual(s, geom, I, xcg, h, vt, gamma, TR, psi)
     % coordinado, der(psi)=TR, y las derivadas de las 8 primeras variables 
     % de estado sean igual a cero.
     
-    % A partir de las variables de iteracion del tirmado se calculan las 
+    % A partir de las variables de iteración del trimado se calculan las 
     % variables de estado y de entrada
     [x,u] = s_to_x_u(s, h, vt, psi);   
 
@@ -17,7 +17,7 @@ function [out] = residual(s, geom, I, xcg, h, vt, gamma, TR, psi)
 
     out(9) = TR - xd(9);   
 
-    %Giro coordinado, TR
+    % Giro coordinado, TR
     G = TR*x(1)/9.81;
     a_tr = 1-G*tan(x(2))*sin(x(5));
     b_tr = sin(gamma)/cos(x(5));
@@ -26,7 +26,7 @@ function [out] = residual(s, geom, I, xcg, h, vt, gamma, TR, psi)
     tanphi = tanphi/(a_tr^2-b_tr^2*(1+c_tr*tan(x(2))^2));
     out(10) = x(8) - atan(tanphi);
     
-    %Ritmo de ascenso, ROC
+    % Ritmo de ascenso, ROC
     a_roc = cos(x(2))*cos(x(5));
     b_roc = sin(x(8))*sin(x(5))+cos(x(8))*sin(x(2))*cos(x(5)); 
     out(11) = x(4) - atan((a_roc*b_roc + sin(gamma)*sqrt(a_roc^2-(sin(gamma))^2+b_roc^2))/(a_roc^2-sin(gamma)^2));

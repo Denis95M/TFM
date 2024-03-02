@@ -4,7 +4,7 @@ FontSizeTitle=12;
 FontSizeAxis=10;
 LineWidth=2;
 
-% Obtencion funciones de transferencia mov. longitudinal para las dos
+% Obtención funciones de transferencia mov. longitudinal para las dos
 % variables de entrada (delta_e y delta_t)
 [num_delta_e, den_long] = ss2tf(Al,Bl,C,D, 1);
 [num_delta_t, ~] = ss2tf(Al,Bl,C,D, 2);
@@ -114,7 +114,7 @@ a.ZAxis.Color = [0 0 0];
 a.YAxis(2).Label.String = 'Amplitud \phi';
 saveas(gcf,'escalon_delta_r.jpg');
 
-% Obtencion polos y ceros del sistema y su representacion
+% Obtención polos y ceros del sistema y su representación
 [z_delta_e, p_long, k_delta_e] = tf2zp(num_delta_e, den_long);
 [z_delta_t, ~, k_delta_t] = tf2zp(num_delta_t, den_long);
 

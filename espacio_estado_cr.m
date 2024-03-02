@@ -5,7 +5,7 @@ clear
 clc
 close all
 
-% Condicion de vuelo para el analisis dinamico
+% Condición de vuelo para el análisis dinámico
 vt    = 140;
 h     = 1000;
 gamma = 0;
@@ -26,10 +26,10 @@ C = eye(4);
 
 % Desacoplamiento de mov. longitudinal y lateral-direccional
 
-% Definicion de sistema movimiento longitudinal
+% Definición de sistema movimiento longitudinal
 sys_long = ss(Al,Bl,C,D); 
 systf_long = tf(sys_long); 
 
-% Definicion de sistema movimiento lateral direccional
+% Definición de sistema movimiento lateral direccional
 sys_ld=ss(Ald,Bld,C,D); 
 systf_ld=tf(sys_ld); 

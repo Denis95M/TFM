@@ -35,7 +35,7 @@ for j=1:2
     hold on
     
     for i= 1:length(q_LQR)
-        if j==1 % Numero del grafico activo 
+        if j==1 % Número del gráfico activo 
             plot(t,y(:,5,i),'DisplayName',strcat('q_{lqr}=',num2str(q_LQR(i))),'linewidth',LineWidth); 
         else
             plot(t,u_c(:,i),'DisplayName',strcat('q_{lqr}=',num2str(q_LQR(i))),'linewidth',LineWidth);

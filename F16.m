@@ -1,5 +1,5 @@
 function [geom, I] = F16()
-% Se cargan los datos del avion de estudio
+% Se cargan los datos del avión de estudio
     mass = 91188/9.81;      % [kg]
     b = 9.144;              % [m]
     S = 27.87;              % [m2]

@@ -30,7 +30,7 @@ entradas = {" u_a", " \delta_a", " u_r", " \delta_r"};
 figure(2);
 
 for j=1:4
-    subplot(2, 2, j)    % Numero del grafico activo
+    subplot(2, 2, j)    % Número del gráfico activo
     title(strcat(entradas{j},' en la respuesta para diferentes q'),'Fontsize',FontSizeTitle);
     hold on
     

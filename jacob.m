@@ -1,5 +1,5 @@
 function [A,B,delta_conv_A,delta_conv_B,err_A,err_B] = jacob(xtrim, utrim, geom, I, xcg)
-% Linealizacion del sistema alrededor de la condicion de referencia
+% Linealización del sistema alrededor de la condición de referencia
 % xtrim, utrim
     A=zeros(8,8);
     B=zeros(8,4);
@@ -12,7 +12,7 @@ function [A,B,delta_conv_A,delta_conv_B,err_A,err_B] = jacob(xtrim, utrim, geom,
     tol = 1e-8;
     
     for i=1:8
-        %Calculamos A
+        % Cálculo de la matriz A
         for j=1:8
             delta = delta_0;
             Aij=1e10;
@@ -39,7 +39,7 @@ function [A,B,delta_conv_A,delta_conv_B,err_A,err_B] = jacob(xtrim, utrim, geom,
                 A(i,j) = Aij;
             end
         end
-        %Calculamos B
+        % Cálculo de la matriz B
         for j=1:4
             delta = delta_0;
             Bij=1e10;

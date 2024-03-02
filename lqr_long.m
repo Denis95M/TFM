@@ -1,25 +1,25 @@
-espacio_estado_cr       % Se cargan los smas LTI del movimiento del avion
+espacio_estado_cr       % Se cargan los smas LTI del movimiento del avión
 
 % Se obtiene el sma actuado correspondiente al mov. longitudinal
 [sys_la, Ala, Bla, Cla, Dla] = actuador(sys_long, 1/20.2, 1); 
 
-% Definicion de la estructura de Q y de R
+% Definición de la estructura de Q y de R
 R = 1;
 Q = diag([0.01 20 100 1 0]);
 
-% Definicion de la condicion inicial
+% Definición de la condición inicial
 x0 = [0 -5*pi/180 -1*pi/180 -5*pi/180 0];
 
-rank(obsv(sqrt(Q),Ala))    % Comprobacion de la condicion de observabilidad
+rank(obsv(sqrt(Q),Ala))    % Comprobación de la condición de observabilidad
 
-% Obtencion de la respuesta del sistema controlado para diferentes q_LQR
+% Obtención de la respuesta del sistema controlado para diferentes q_LQR
 q_LQR=[0 1 10 100 500 1000];
 t = linspace(0, 10, 6001);
 u = zeros(length(t),1);     % Entrada del piloto para calcular respuesta
-n = length(Ala);            % Numero de variables de estado
-nq = length(q_LQR);         % Numero de valores de q_LQR que se comprueban
+n = length(Ala);            % Número de variables de estado
+nq = length(q_LQR);         % Número de valores de q_LQR que se comprueban
 y=zeros(length(t),n,nq);    % Respuesta temporal del sistema
-u_c=zeros(length(t),nq);    % Correccion comandada por el actuador
+u_c=zeros(length(t),nq);    % Corrección comandada por el actuador
 K = zeros(n,nq);            % Matrices de ganancias para cada q_LQR probada
 
 for i=1:nq

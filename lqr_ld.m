@@ -1,26 +1,26 @@
-espacio_estado_cr       % Se cargan los smas LTI del movimiento del avion
+espacio_estado_cr       % Se cargan los smas LTI del movimiento del avión
 
 % Se obtiene el sma actuado correspondiente al mov. lateral-direccional
 [sys_lda, Alda, Blda, Clda, Dlda] = actuador(sys_ld,1/20.2,2);
 
 
-% Definicion de la estructura de Q y de R
+% Definición de la estructura de Q y de R
 Q=diag([5 1 10 1 zeros(1,2)]);
 R=[1 0;0 2];
 
-% Definicion de la condicion inicial
+% Definición de la condición inicial
 x0 = [30*pi/180 zeros(1,5)];
 
-rank(obsv(sqrt(Q),Alda)) % Comprobacion de la condicion de observabilidad
+rank(obsv(sqrt(Q),Alda)) % Comprobación de la condición de observabilidad
 
-% Obtencion de la respuesta del sistema controlado para diferentes q
+% Obtención de la respuesta del sistema controlado para diferentes q
 q=[0 100 200 300 400 500];
 t = linspace(0, 6, 6001);
 u = zeros(length(t),2);       % Entrada del piloto para calcular respuesta
-n = length(Alda);             % Numero de variables de estado
-nq = length(q);               % Numero de valores de q que se comprueban
+n = length(Alda);             % Número de variables de estado
+nq = length(q);               % Número de valores de q que se comprueban
 y=zeros(length(t),n,nq);      % Respuesta temporal del sistema
-u_c=zeros(length(t),2,nq);    % Correccion comandada por el actuador
+u_c=zeros(length(t),2,nq);    % Corrección comandada por el actuador
 K = zeros(2,n,nq);            % Matrices de ganancias para cada q probada
 
 for i=1:nq
