@@ -1,8 +1,11 @@
 function [out] = xdf(x, u, geom, I, xcg)
 
-% x=[Vt, alpha, q, theta, beta, p, r, phi, psi, xe, ye, h]
-% u=[delta_e, delta_a, delta_r, delta_t]
-% geom =[mass, S, b, c, XCG, HX]
+% Se calculan las derivadas de las variables de estado mediante las
+% ecuaciones del movimiento.
+
+% x = [Vt, alpha, q, theta, beta, p, r, phi, psi, xe, ye, h]
+% u = [delta_e, delta_a, delta_r, delta_t]
+% geom = [mass, S, b, c, XCG, HX]
 
 %   [ Ixx Ixy Ixz ]
 % I=[ Ixy Iyy Iyz ]

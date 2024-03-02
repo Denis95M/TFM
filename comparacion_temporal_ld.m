@@ -57,7 +57,7 @@ saveas(gcf,'comparacion_ld_x.jpg');
 figure(2);
 for j=1:2
     subplot(2, 1, j)
-    title(strcat('Deflexión ',variables_ld{4+j}),'Fontsize',FontSizeTitle);
+    title(strcat('Deflexion ',variables_ld{4+j}),'Fontsize',FontSizeTitle);
     hold on
     
     plot(t_ld,y_ld_ap(:,4+j),'DisplayName','asig. polos','linewidth',LineWidth); 

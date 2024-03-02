@@ -1,11 +1,18 @@
 function [out] = residual(s, geom, I, xcg, h, vt, gamma, TR, psi)
+    % Calcula el error del trimado, imponiendo ligaduras de ascenso y giro
+    % coordinado, der(psi)=TR, y las derivadas de las 8 primeras variables 
+    % de estado sean igual a cero.
     
-    %TR=Turn Rate, target psi dot
-    
-    [x,u] = s_to_x_u(s, h, vt, psi);
+    % A partir de las variables de iteracion del tirmado se calculan las 
+    % variables de estado y de entrada
+    [x,u] = s_to_x_u(s, h, vt, psi);   
 
     out = zeros(11,1);
+    
+    % Se calculan las derivadas del vector de variables de estado
     xd = xdf(x, u, geom, I, xcg);
+
+    % Se impone que las 8 primeras derivadas sean igual a cero
     out(1:8) = xd(1:8);
 
     out(9) = TR - xd(9);   

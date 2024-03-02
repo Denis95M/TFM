@@ -1,5 +1,6 @@
 function [A,B,delta_conv_A,delta_conv_B,err_A,err_B] = jacob(xtrim, utrim, geom, I, xcg)
-
+% Linealizacion del sistema alrededor de la condicion de referencia
+% xtrim, utrim
     A=zeros(8,8);
     B=zeros(8,4);
     delta_conv_A = zeros(8,8);

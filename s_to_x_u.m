@@ -1,5 +1,5 @@
 function [x,u] = s_to_x_u(s, h, vt, psi)
-
+    % Se asignan las variables de iteracion (s) a los vectores x y u
     x = zeros(1,12);
     u = zeros(1,4);
 

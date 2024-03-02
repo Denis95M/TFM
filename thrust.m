@@ -35,7 +35,7 @@ function out= thrust(delta_t,h,Mach)
     B_interp = interp2(h_vec, M_vec, B, h, Mach);
     C_interp = interp2(h_vec, M_vec, C, h, Mach);
     
-    pow_vec = [0:50:100];
+    pow_vec = 0:50:100;
     thrust_vec = [A_interp B_interp C_interp];
     
     out = interp1(pow_vec, thrust_vec, delta_t*100);

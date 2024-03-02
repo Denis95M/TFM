@@ -53,7 +53,7 @@ end
 saveas(gcf,'comparacion_l_x.jpg');
 
 figure(2);
-title('Deflexión de \delta_e','Fontsize',FontSizeTitle);
+title('Deflexion de \delta_e','Fontsize',FontSizeTitle);
 hold on
 
 plot(t_l,y_l_ap(:,5),'DisplayName','asig. polos','linewidth',LineWidth); 

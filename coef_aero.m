@@ -1,9 +1,9 @@
 function  [CX,CY,CZ,Cl,Cm,Cn] = coef_aero(x,u,geom,xcg)
-
-    % x=[Vt, alpha, q, theta, beta, p, r, phi, h, pow]
-    % u=[delta_e, delta_a, delta_r, delta_t]
-    % geom =[mass, S, b, c, XCGR, HX]
-    % D = [CXq, CYr, CYp, CZq, Clr, Clp, Cmq, Cnr, Cnp]
+   % Se calculan los coeficientes aerodinamicos de fuerzas y momentos
+   % x=[Vt, alpha, q, theta, beta, p, r, phi, h, pow]
+   % u=[delta_e, delta_a, delta_r, delta_t]
+   % geom =[mass, S, b, c, XCGR, HX]
+   % D = [CXq, CYr, CYp, CZq, Clr, Clp, Cmq, Cnr, Cnp]
    
    D = dampf(x(2));
    

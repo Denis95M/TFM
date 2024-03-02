@@ -51,5 +51,7 @@ function o = custom_bodeplot(sys,IN_label,OUT_label, title_label,fig,fileName)
     end
     
     set(gcf, 'Position',  [100, 100, 1000, 800]);
-    saveas(gcf,[fileName]);
+    saveas(gcf,fileName);
+    o=t;
+
 end
