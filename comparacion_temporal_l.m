@@ -1,12 +1,12 @@
 lqr_long
 
+% Calculo de la matriz de ganancias por asignacion de polos
 tau_a = 1/20.2;
 [sys_long, Ala, Bla, Cla, Dla] = actuador(sys_long, tau_a, 1);
-
 p=[-2.7+1.308i, -2.7-1.308i, -0.0665+0.0698i, -0.0665-0.0698i, -1/tau_a];
+K_l_ap = place(Ala, Bla, p);    
 
-K_l_ap = place(Ala, Bla, p);
-K_l_lqr = K(:,3)';
+K_l_lqr = K(:,3)';  % Seleccion de K para el q_LQR elegido
 
 A_l_ap = Ala-Bla*K_l_ap*Cla;
 A_l_lqr = Ala-Bla*K_l_lqr*Cla;
@@ -17,14 +17,11 @@ controlado_l_lqr = ss(A_l_lqr, Bla, Cla, Dla);
 t_l = linspace(0, 60, 6001);
 x0_l = [5 5*pi/180 1*pi/180 5*pi/180 0];
 
-u_l = zeros(length(t),1);
+u_l = zeros(length(t),1);   % Entrada del piloto, se mantiene a cero
 
 y_l_la   = lsim(sys_long,u_l,t_l,x0_l);
 y_l_ap   = lsim(controlado_l_ap,u_l,t_l,x0_l);
 y_l_lqr   = lsim(controlado_l_lqr,u_l,t_l,x0_l);
-
-y_controles_l_ap = lsim(ss(0,zeros(1,length(Ala),1),0,K_l_ap),y_l_ap,t,0);
-y_controles_l_lqr = lsim(ss(0,zeros(1,length(Ala)),0,K_l_lqr),y_l_lqr,t,0);
 
 variables_l = {' Vt', ' \alpha', ' q', ' \theta'};
 unidad_l = {'m/s','rad','rad/s','rad'};

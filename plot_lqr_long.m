@@ -1,4 +1,4 @@
-lqr_long
+lqr_long    % Se cargan las respuestas del sma para diferentes q_LQR
 FontSizeTitle=12;
 FontSizeAxis=10;
 LineWidth=2;
@@ -6,13 +6,13 @@ LineWidth=2;
 variables = {' Vt', ' \alpha', ' q', ' \theta'};
 unidad = {'m/s','rad','rad/s','rad'};
 figure(1);
-for j=1:4
+for j=1:4   % j recorre las variables de estado a pintar
     subplot(2, 2, j)
     title(strcat('Respuesta de',variables{j},' para diferentes q_{lqr}'),'Fontsize',FontSizeTitle);
     hold on
     
-    for i= 1:length(q)
-        imp=plot(t,y(:,j,i),'DisplayName',strcat('q_{lqr}=',num2str(q(i))),'linewidth',LineWidth); 
+    for i= 1:length(q_LQR)
+        plot(t,y(:,j,i),'DisplayName',strcat('q_{lqr}=',num2str(q_LQR(i))),'linewidth',LineWidth); 
     end
     
     legend()
@@ -26,19 +26,19 @@ for j=1:4
     grid on
 end
 saveas(gcf,'x_lqr_long.jpg');
+
 entradas = {" \delta_e", " u_e"};
 figure(2);
-
 for j=1:2
     subplot(2, 1, j)
     title(strcat('Entrada de ',entradas{j},' en la respuesta para diferentes q_{lqr}'),'Fontsize',FontSizeTitle);
     hold on
     
-    for i= 1:length(q)
-        if j==1 
-            imp=plot(t,y(:,5,i),'DisplayName',strcat('q_{lqr}=',num2str(q(i))),'linewidth',LineWidth); 
+    for i= 1:length(q_LQR)
+        if j==1 % Numero del grafico activo 
+            plot(t,y(:,5,i),'DisplayName',strcat('q_{lqr}=',num2str(q_LQR(i))),'linewidth',LineWidth); 
         else
-            imp=plot(t,u_c(:,i),'DisplayName',strcat('q_{lqr}=',num2str(q(i))),'linewidth',LineWidth);
+            plot(t,u_c(:,i),'DisplayName',strcat('q_{lqr}=',num2str(q_LQR(i))),'linewidth',LineWidth);
         end
     end
     

@@ -1,3 +1,6 @@
+% En este script se calcula el sma LTI para las condiciones de referencia
+% deseadas
+
 clear
 clc
 close all
@@ -21,12 +24,12 @@ Bld = B(5:8, 2:3);
 D = zeros(4, 2);
 C = eye(4);
 
+% Desacoplamiento de mov. longitudinal y lateral-direccional
+
 % Definicion de sistema movimiento longitudinal
 sys_long = ss(Al,Bl,C,D); 
 systf_long = tf(sys_long); 
-k_long = dcgain(sys_long);
 
 % Definicion de sistema movimiento lateral direccional
 sys_ld=ss(Ald,Bld,C,D); 
 systf_ld=tf(sys_ld); 
-k_ld = dcgain(sys_ld);
