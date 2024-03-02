@@ -5,13 +5,8 @@ clear
 clc
 close all
 
-% Condición de vuelo para el análisis dinámico
-vt    = 140;
-h     = 1000;
-gamma = 0;
-TR    = 0;
-xcg   = 0.3;
-psi   = 0;
+% Se carga la condición de vuelo para el análisis dinámico
+condicion_inestable
 
 [geom, I] = F16();
 

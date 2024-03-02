@@ -25,6 +25,7 @@ y_l_lqr   = lsim(controlado_l_lqr,u_l,t_l,x0_l);
 
 variables_l = {' Vt', ' \alpha', ' q', ' \theta'};
 unidad_l = {'m/s','rad','rad/s','rad'};
+ylim = {[-2 5], [-0.03 0.1], [-0.1 0.05], [-0.025 0.1] };
 
 FontSizeTitle=12;
 FontSizeAxis=10;
@@ -46,6 +47,7 @@ for j=1:4
     a.YAxis.Color = [0 0 0]; 
     a.XAxis.Color = [0 0 0];
     a.ZAxis.Color = [0 0 0];
+    a.YLim = ylim{j};
     ylabel(strcat('Amplitud [',unidad_l(j),']'))
     xlabel('Tiempo [s]')
     grid on
