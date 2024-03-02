@@ -4,7 +4,7 @@ espacio_estado_cr
 
 % Definicion de la estructura de Q y de R
 Q=diag([5 1 10 1 zeros(1,length(Alda)-4)]);
-R=[1 0;0 1];
+R=[1 0;0 2];
 rank(obsv(sqrt(Q),Alda))
 
 % Obtencion de la respuesta del sistema controlado para diferentes q
@@ -24,7 +24,7 @@ for i=1:length(q)
     A_lqr = Alda-Blda*K(:,:,i);
     controlado = ss(A_lqr,Blda,Clda,Dlda);
     y(:,:,i) = lsim(controlado,u,t,x0);
-    y_controles(:,:,i) = lsim(ss(0,zeros(1,length(Alda)),[0; 0],K(:,:,i)),y(:,:,i),t,0);
+    y_controles(:,:,i) = -lsim(ss(0,zeros(1,length(Alda)),[0; 0],K(:,:,i)),y(:,:,i),t,0);
 end
 
 
