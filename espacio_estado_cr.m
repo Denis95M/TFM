@@ -6,7 +6,7 @@ clc
 close all
 
 % Se carga la condición de vuelo para el análisis dinámico
-condicion_inestable
+condicion_ref
 
 [geom, I] = F16();
 
